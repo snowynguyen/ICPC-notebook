@@ -3,6 +3,9 @@
 # Subsections within a section should follow the format:
 #   [filename within code directory][tab character \t][subsection title]
 
+[Mathematics]
+Combinatorics.tex	Combinatorics
+
 [Combinatorial optimization]
 #MaxFlow.cc	Dense max-flow
 Dinic.cc	Sparse max-flow
@@ -57,7 +60,6 @@ Primes.cc	Prime numbers
 IO.cc	C++ input/output
 KMP.cc	Knuth-Morris-Pratt
 LatLong.cc	Latitude/longitude
-EmacsSettings.txt	Emacs settings
 #TopologicalSort.cc	Topological sort (C++)
 #Dates.java	Dates (Java)
 #DecFormat.java	Decimal output formatting (Java)
