@@ -39,6 +39,7 @@ Simplex.cc	Simplex algorithm
 #DijkstraFloyd.cc	Dijkstra and Floyd's algorithm (C++)
 FastDijkstra.cc	Fast Dijkstra's algorithm
 SCC.cc	Strongly connected components
+Bridges.cpp	Bridges And Articulation Points
 EulerianPath.cc	Eulerian path
 #Kruskal.cc	Kruskal's algorithm
 #Prim.cc	Minimum spanning trees

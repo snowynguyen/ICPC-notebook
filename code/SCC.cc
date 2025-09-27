@@ -1,37 +1,61 @@
-#include<memory.h>
-struct edge{int e, nxt;};
-int V, E;
-edge e[MAXE], er[MAXE];
-int sp[MAXV], spr[MAXV];
-int group_cnt, group_num[MAXV];
-bool v[MAXV];
-int stk[MAXV];
-void fill_forward(int x)
-{
-  int i;
-  v[x]=true;
-  for(i=sp[x];i;i=e[i].nxt) if(!v[e[i].e]) fill_forward(e[i].e);
-  stk[++stk[0]]=x;
-}
-void fill_backward(int x)
-{
-  int i;
-  v[x]=false;
-  group_num[x]=group_cnt;
-  for(i=spr[x];i;i=er[i].nxt) if(v[er[i].e]) fill_backward(er[i].e);
-}
-void add_edge(int v1, int v2) //add edge v1->v2
-{
-  e [++E].e=v2; e [E].nxt=sp [v1]; sp [v1]=E;
-  er[  E].e=v1; er[E].nxt=spr[v2]; spr[v2]=E;
-}
-void SCC()
-{
-  int i;
-  stk[0]=0;
-  memset(v, false, sizeof(v));
-  for(i=1;i<=V;i++) if(!v[i]) fill_forward(i);
-  group_cnt=0;
-  for(i=stk[0];i>=1;i--) if(v[stk[i]]){group_cnt++; fill_backward(stk[i]);}
+#include <vector>
+vector<bool> visited; // keeps track of which vertices are already visited
+
+// runs depth first search starting at vertex v.
+// each visited vertex is appended to the output vector when dfs leaves it.
+void dfs(int v, vector<vector<int> > const& adj, vector<int> &output) {
+    visited[v] = true;
+    for (auto u : adj[v])
+        if (!visited[u])
+            dfs(u, adj, output);
+    output.push_back(v); // This is used to record the t_out of each vertices
 }
 
+// input: adj -- adjacency list of G
+// output: components -- the strongy connected components in G
+// output: adj_cond -- adjacency list of G^SCC (by root vertices)
+void strongly_connected_components(vector<vector<int> > const& adj,
+                                  vector<vector<int> > &components,
+                                  vector<vector<int> > &adj_cond) {
+    int n = adj.size();
+    components.clear(), adj_cond.clear();
+
+    vector<int> order; // will be a sorted list of G's vertices by exit time
+
+    visited.assign(n, false);
+
+    // first series of depth first searches
+    for (int i = 0; i < n; i++)
+        if (!visited[i])
+            dfs(i, adj, order);
+
+    // create adjacency list of G^T
+    vector<vector<int> > adj_rev(n);
+    for (int v = 0; v < n; v++)
+        for (int u : adj[v])
+            adj_rev[u].push_back(v);
+
+    visited.assign(n, false);
+    reverse(order.begin(), order.end());
+
+    vector<int> roots(n, 0); // gives the root vertex of a vertex's SCC
+
+    // second series of depth first searches
+    for (auto v : order)
+        if (!visited[v]) {
+            std::vector<int> component;
+            dfs(v, adj_rev, component);
+            components.push_back(component);
+            int root = *min_element(begin(component), end(component)); 
+            // actually, we can choose any element in the component!!!.
+            for (auto u : component)
+                roots[u] = root;
+        }
+
+    // add edges to condensation graph
+    adj_cond.assign(n, {});
+    for (int v = 0; v < n; v++)
+        for (auto u : adj[v])
+            if (roots[v] != roots[u])
+                adj_cond[roots[v]].push_back(roots[u]);
+}
