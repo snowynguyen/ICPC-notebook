@@ -12,8 +12,6 @@ struct TEdge
  
 map<pair<int, int> , long long>  ww;
 int n,m;
-vector< TEdge> g[N];
-
 void enter()
 {
     cin >> n >> m;
@@ -25,6 +23,7 @@ void enter()
     }
 }
 
+vector< TEdge> g[N];
 void init()
 {
     int ru, rv;
