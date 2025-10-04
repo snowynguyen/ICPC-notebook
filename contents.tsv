@@ -6,7 +6,7 @@
 [Mathematics]
 Combinatorics.tex	Combinatorics
 NumberTheory.cc	Number theory (modular, linear Diophantine)
-ChineseRemainderTheorem.cc Chinese Remainder Theorem
+ChineseRemainderTheorem.cc	Chinese Remainder Theorem
 
 [Combinatorial optimization]
 #MaxFlow.cc	Dense max-flow
@@ -41,16 +41,16 @@ DijkstraFloyd.cc	Dijkstra and Floyd's algorithm (C++)
 FastDijkstra.cc	Fast Dijkstra's algorithm
 SCC.cc	Strongly connected components
 Bridges.cpp	Bridges And Articulation Points
-2-SAT.cc 2-SAT
+2SAT.cc	2-SAT
 #EulerianPath.cc	Eulerian path
 Kruskal.cc	Kruskal's algorithm
 #Prim.cc	Minimum spanning trees
 
 [Data structures]
 SuffixArray.cc	Suffix array
-DSU.cc Disjoint Set Union
-SegmentTree.cc SegmentTree + Lazy Propagation
-SparseTable.cc SparseTable
+DSU.cc	Disjoint Set Union
+SegmentTree.cc	SegmentTree + Lazy Propagation
+SparseTable.cc	SparseTable
 BIT.cc	Binary Indexed Tree
 #UnionFind.cc	Union-find set
 #KDTree.cc	KD-tree

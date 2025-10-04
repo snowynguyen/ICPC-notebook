@@ -5,7 +5,7 @@ VinUniversity ICPC Team Reference Notebook. Forked from Stanford ACM-ICPC teams'
 
 Generating / compiling team notebook
 ========================
-The included Python scripts can generate the notebook in PDF or HTML format. Both scripts read the contents of the notebook from `contents.txt`.
+The included Python scripts can generate the notebook in PDF or HTML format. Both scripts read the contents of the notebook from `contents.tsv`.
 
 Prerequisites
 -----------
@@ -28,9 +28,9 @@ Syntax highlighting is handled solely by enscript, and in order to change the co
 Contribution to the team notebook
 ========================
 
-## `contents.txt` 
+## `contents.tsv` 
 
-- The general outline is given in the `contents.txt` file.
+- The general outline is given in the `contents.tsv` file.
 - Any line followed by a `#` character is ignored
 - Section headings must be in square brackets
 - Subsections within a section should follow the format:
