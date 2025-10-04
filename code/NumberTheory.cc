@@ -1,6 +1,4 @@
-// This is a collection of useful code for solving problems that
-// involve modular linear equations.  Note that all of the
-// algorithms described here work on nonnegative integers.
+// DONE!!
 
 #include <iostream>
 #include <vector>
