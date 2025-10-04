@@ -67,5 +67,5 @@ LatLong.cc	Latitude/longitude
 #RandomSTL.cc	Random STL stuff
 #CSP.cc	Constraint satisfaction problems
 #FastExpo.cc	Fast exponentiation
-#LCS.cc	Longest common subsequence
+LCS.cc	Longest common subsequence
 #MillerRabin.c	Miller-Rabin Primality Test (C)
