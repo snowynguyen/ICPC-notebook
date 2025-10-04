@@ -115,9 +115,27 @@ struct PushRelabel {
   }
 };
 
-// BEGIN CUT
-// The following code solves SPOJ problem #4110: Fast Maximum Flow (FASTFLOW)
+// The following code solves SPOJ problem 4110: Fast Maximum Flow (FASTFLOW)
+/* Input
+The first line contains the two integers N and M. The next M lines each contain 
+three integers A, B, and C, denoting that there is an edge of capacity C (1 <= C <= 109) between nodes A and B (1 <= A, B <= N). Note that it is possible for there to be duplicate edges, as well as an edge from a node to itself.
 
+Output
+Print a single integer (which may not fit into a 32-bit integer) denoting the 
+maximum flow / minimum cut between 1 and N.
+
+Example
+Input:
+4 6
+1 2 3
+2 3 4
+3 1 2
+2 2 5
+3 4 3
+4 3 3
+Output:
+5   
+*/
 int main() {
   int n, m;
   scanf("%d%d", &n, &m);
@@ -133,5 +151,3 @@ int main() {
   printf("%Ld\n", pr.GetMaxFlow(0, n-1));
   return 0;
 }
-
-// END CUT
