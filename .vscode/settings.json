@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "vector": "cpp"
+        "vector": "cpp",
+        "*.tsv": "tsv",
+    },
+     "[tsv]": {
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": false
     }
 }

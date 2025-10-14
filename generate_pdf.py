@@ -8,7 +8,7 @@ title = "Stanford ACM-ICPC Team Notebook"
 def get_sections():
     sections = []
     section_name = None
-    with open('contents.txt', 'r') as f:
+    with open('contents.tsv', 'r') as f:
         for line in f:
             if '#' in line: line = line[:line.find('#')]
             line = line.strip()
