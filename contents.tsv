@@ -12,7 +12,7 @@ ChineseRemainderTheorem.cc	Chinese Remainder Theorem
 
 [Combinatorial optimization]
 #MaxFlow.cc	Dense max-flow
-Dinic.cc	Sparse max-flow
+FFLow.cpp	Dinic max-flow for sparse graph
 MinCostMaxFlow.cc	Min-cost max-flow
 #PushRelabel.cc	Push-relabel max-flow	
 #MinCostMatching.cc	Min-cost matching
