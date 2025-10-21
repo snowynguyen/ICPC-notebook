@@ -1,20 +1,27 @@
-// Official version
+#include <vector>
+#include <algorithm>
+using namespace std;
+struct DSU{
+    vector<int> r;
+    int n;
 
-void make_set(int v) {
-    parent[v] = v;
-    sz[v] = 1; // Ban đầu tập hợp chứa v có kích cỡ là 1
-}
-
-int find_set(int v) {
-    return v == parent[v] ? v : parent[v] = find_set(parent[v]);
-}
-
-void union_sets(int a, int b) {
-    a = find_set(a);
-    b = find_set(b);
-    if (a != b) {
-        if (sz[a] < sz[b]) swap(a, b); // Đặt biến a là gốc của cây có kích cỡ lớn hơn
-        parent[b] = a;
-        sz[a] += sz[b]; // Cập nhật kích cỡ của cây mới gộp lại
+    DSU (int n) : n(n) {
+        r.assign(n+1, -1);
     }
-}
+
+    int root (int u) {
+        if (r[u] < 0) return u;
+        return r[u] = root(r[u]);
+    }
+
+    void mergetree (int ru, int rv) {
+        ru = root(ru);
+        rv = root(rv);
+        if (ru == rv) 
+            return;
+        if (r[ru] > r[rv]) 
+            swap(ru, rv);
+        r[ru] += r[rv];
+        r[rv] = ru;
+    }
+};

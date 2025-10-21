@@ -1,111 +1,62 @@
-// Suffix array construction in O(L log^2 L) time.  Routine for
-// computing the length of the longest common prefix of any two
-// suffixes in O(log L) time.
-//
-// INPUT:   string s
-//
-// OUTPUT:  array suffix[] such that suffix[i] = index (from 0 to L-1)
-//          of substring s[i...L-1] in the list of sorted suffixes.
-//          That is, if we take the inverse of the permutation suffix[],
-//          we get the actual suffix array.
-
-#include <vector>
-#include <iostream>
-#include <string>
-
+#include<bits/stdc++.h>
 using namespace std;
 
-struct SuffixArray {
-  const int L;
-  string s;
-  vector<vector<int> > P;
-  vector<pair<pair<int,int>,int> > M;
+struct SA {
+    string s;
+    vector<int> p;
+    int n;
 
-  SuffixArray(const string &s) : L(s.length()), s(s), P(1, vector<int>(L, 0)), M(L) {
-    for (int i = 0; i < L; i++) P[0][i] = int(s[i]);
-    for (int skip = 1, level = 1; skip < L; skip *= 2, level++) {
-      P.push_back(vector<int>(L, 0));
-      for (int i = 0; i < L; i++) 
-	M[i] = make_pair(make_pair(P[level-1][i], i + skip < L ? P[level-1][i + skip] : -1000), i);
-      sort(M.begin(), M.end());
-      for (int i = 0; i < L; i++) 
-	P[level][M[i].second] = (i > 0 && M[i].first == M[i-1].first) ? P[level][M[i-1].second] : i;
-    }    
-  }
-
-  vector<int> GetSuffixArray() { return P.back(); }
-
-  // returns the length of the longest common prefix of s[i...L-1] and s[j...L-1]
-  int LongestCommonPrefix(int i, int j) {
-    int len = 0;
-    if (i == j) return L - i;
-    for (int k = P.size() - 1; k >= 0 && i < L && j < L; k--) {
-      if (P[k][i] == P[k][j]) {
-	i += 1 << k;
-	j += 1 << k;
-	len += 1 << k;
-      }
+    SA (string s) : s(s) {
+        s = s + "$";
+        n = s.size();
+        p.resize(n); 
+    
+        for (int i=0; i<n; ++i) 
+            p[i] = i;
+        
+        sort (p.begin(), p.end(), [&] (int a, int b) {
+            return s[a] < s[b];
+        });
+        vector<int> rank(n, 0);
+        for (int i=0; i<n; ++i) {
+            rank[i] = lower_bound(p.begin(), p.end(), i, [&] (int a, int b) {
+                return s[a] < s[b];
+            }) - p.begin();
+        }
+        
+        vector<int> rank_new(n), p_new(n), cnt(n);
+        for (int k=1; k<n; k*=2) {
+            for (int i = 0; i < n; i++) {
+                p_new[i] = p[i] - k;
+                if (p_new[i] < 0) p_new[i] += n;
+            }
+            cnt.assign(n, 0); rank_new.assign(n, 0);
+            for (int i = 0; i < n; i++)
+                cnt[rank[p_new[i]]]++;
+            for (int i = 1; i < n; i++)
+                cnt[i] += cnt[i-1];
+            for (int i = n-1; i >= 0; i--)
+                p[--cnt[rank[p_new[i]]]] = p_new[i];
+            rank_new[p[0]] = 0;
+            int classes = 0;
+            for (int i = 1; i < n; i++) {
+                pair<int, int> cur = {rank[p[i]], rank[(p[i] + k) % n]};
+                pair<int, int> prev = {rank[p[i-1]], rank[(p[i-1] + k) % n]};
+                if (cur != prev)
+                    ++classes;
+                rank_new[p[i]] = classes;
+            }
+            rank.swap(rank_new);
+        }
     }
-    return len;
-  }
 };
 
-// BEGIN CUT
-// The following code solves UVA problem 11512: GATTACA.
-#define TESTING
-#ifdef TESTING
+// Input "ppppplppp" -> Output "9 5 8 4 7 3 6 2 1 0"
+// "ababba" -> "6 5 0 2 4 1 3" 
 int main() {
-  int T;
-  cin >> T;
-  for (int caseno = 0; caseno < T; caseno++) {
-    string s;
-    cin >> s;
-    SuffixArray array(s);
-    vector<int> v = array.GetSuffixArray();
-    int bestlen = -1, bestpos = -1, bestcount = 0;
-    for (int i = 0; i < s.length(); i++) {
-      int len = 0, count = 0;
-      for (int j = i+1; j < s.length(); j++) {
-	int l = array.LongestCommonPrefix(i, j);
-	if (l >= len) {
-	  if (l > len) count = 2; else count++;
-	  len = l;
-	}
-      }
-      if (len > bestlen || len == bestlen && s.substr(bestpos, bestlen) > s.substr(i, len)) {
-	bestlen = len;
-	bestcount = count;
-	bestpos = i;
-      }
-    }
-    if (bestlen == 0) {
-      cout << "No repetitions found!" << endl;
-    } else {
-      cout << s.substr(bestpos, bestlen) << " " << bestcount << endl;
-    }
-  }
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    string s; cin >> s;
+    SA sa(s);
+    for (auto x : sa.p) cout << x << " ";
 }
-
-#else
-// END CUT
-int main() {
-
-  // bobocel is the 0'th suffix
-  //  obocel is the 5'th suffix
-  //   bocel is the 1'st suffix
-  //    ocel is the 6'th suffix
-  //     cel is the 2'nd suffix
-  //      el is the 3'rd suffix
-  //       l is the 4'th suffix
-  SuffixArray suffix("bobocel");
-  vector<int> v = suffix.GetSuffixArray();
-  
-  // Expected output: 0 5 1 6 2 3 4
-  //                  2
-  for (int i = 0; i < v.size(); i++) cout << v[i] << " ";
-  cout << endl;
-  cout << suffix.LongestCommonPrefix(0, 2) << endl;
-}
-// BEGIN CUT
-#endif
-// END CUT

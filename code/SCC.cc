@@ -1,5 +1,3 @@
-// Official version
-
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -63,5 +61,3 @@ void strongly_connected_components(vector<vector<int> > const& adj,
             if (roots[v] != roots[u])
                 adj_cond[roots[v]].push_back(roots[u]);
 }
-
-int main() {} 

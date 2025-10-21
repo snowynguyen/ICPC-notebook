@@ -23,12 +23,10 @@ void build(int id, int l, int r) {
     st[id] = max(st[2 * id], st[2 * id + 1]);
 }
 
-// Cập nhật nút đang xét và đẩy giá trị lazy xuống các nút con
 void fix(int id, int l, int r) {
-    if (!lazy[id]) return; // nut do = 0 thi update cc gi nua
+    if (!lazy[id]) return; 
     st[id] += lazy[id];
 
-    // Nếu id không phải là nút lá thì đẩy giá trị xuống các nút con
     if (l != r){
         lazy[2 * id] += lazy[id];
         lazy[2 * id + 1] += lazy[id];
@@ -39,11 +37,11 @@ void fix(int id, int l, int r) {
 
 void update(int id, int l, int r, int u, int v, int val) {
 	// Update the whole range [u, v]
-    fix(id, l, r); // lay cai gia tri do ra, roi day xuong may thang khac
+    fix(id, l, r); 
     if (l >  v || r <  u) return;
     if (l >= u && r <= v) {
-        lazy[id] += val; // sudo apt update 
-        fix(id, l, r); // sudo apt upgrade
+        lazy[id] += val; 
+        fix(id, l, r); 
         return;
     }
     int mid = l + r >> 1;

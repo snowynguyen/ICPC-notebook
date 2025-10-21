@@ -1,5 +1,4 @@
 // Official 2-SAT implementation using Kosaraju's algorithm
-
 struct TwoSatSolver {
     int n_vars;
     int n_vertices;
@@ -48,10 +47,6 @@ struct TwoSatSolver {
         for (int i = 0; i < n_vertices; i += 2) {
             if (comp[i] == comp[i + 1])
                 return false;
-            // In topological order, if
-            // $\text{comp}[x] < \text{comp}[\lnot x]$  we assign  $x$  with  $\text{false}$  and  $\text{true}$  otherwise.
-            
-            // False always -> true (in terms of topological order)
             assignment[i / 2] = comp[i] > comp[i + 1];
         }
         return true;

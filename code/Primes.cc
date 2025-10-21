@@ -31,21 +31,25 @@ bool IsPrimeSlow (LL x)
 //    919   929   937   941   947   953   967   971   977   983   991   997
 
 // Other primes:
-//    The largest prime smaller than 10 is 7.
-//    The largest prime smaller than 100 is 97.
-//    The largest prime smaller than 1000 is 997.
-//    The largest prime smaller than 10000 is 9973.
-//    The largest prime smaller than 100000 is 99991.
-//    The largest prime smaller than 1000000 is 999983.
-//    The largest prime smaller than 10000000 is 9999991.
-//    The largest prime smaller than 100000000 is 99999989.
-//    The largest prime smaller than 1000000000 is 999999937.
-//    The largest prime smaller than 10000000000 is 9999999967.
-//    The largest prime smaller than 100000000000 is 99999999977.
-//    The largest prime smaller than 1000000000000 is 999999999989.
-//    The largest prime smaller than 10000000000000 is 9999999999971.
-//    The largest prime smaller than 100000000000000 is 99999999999973.
-//    The largest prime smaller than 1000000000000000 is 999999999999989.
-//    The largest prime smaller than 10000000000000000 is 9999999999999937.
-//    The largest prime smaller than 100000000000000000 is 99999999999999997.
-//    The largest prime smaller than 1000000000000000000 is 999999999999999989.
+// 1  The largest prime smaller than 10 is 7.
+// 2  The largest prime smaller than 100 is 97.
+// 3  The largest prime smaller than 1000 is 997.
+// 4  The largest prime smaller than 10000 is 9973.
+// 5  The largest prime smaller than 100000 is 99991.
+// 6  The largest prime smaller than 1000000 is 999983.
+// 7  The largest prime smaller than 10000000 is 9999991.
+// 8  The largest prime smaller than 100000000 is 99999989.
+// 9  The largest prime smaller than 1000000000 is 999999937.
+//10  The largest prime smaller than 10000000000 is 9999999967.
+//11  The largest prime smaller than 100000000000 is 99999999977.
+//12  The largest prime smaller than 1000000000000 is 999999999989.
+//13  The largest prime smaller than 10000000000000 is 9999999999971.
+//14  The largest prime smaller than 100000000000000 is 99999999999973.
+//15  The largest prime smaller than 1000000000000000 is 999999999999989.
+//16  The largest prime smaller than 10000000000000000 is 9999999999999937.
+//17  The largest prime smaller than 100000000000000000 is 99999999999999997.
+//18  The largest prime smaller than 1000000000000000000 is 999999999999999989.
+// The 20 primes past 1e9+7 are.
+// 1000000007 1000000009 1000000021 1000000033 1000000087 1000000093 1000000097 
+// 1000000103 1000000123 1000000181 1000000207 1000000223 1000000241 1000000271 
+// 1000000289 1000000297 1000000321 1000000349 1000000363 1000000403 

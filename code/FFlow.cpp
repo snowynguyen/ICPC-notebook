@@ -1,19 +1,16 @@
-#include <bits/stdc++.h>
- 
+#include <bits/stdc++.h> 
 using namespace std;
  
 const int N = 5001;
  
 struct TEdge
 {
-    int v,rit; 
+    int v,rit; //rit: reverse edge 
     long long cap,flow;
 };
  
 map<pair<int, int> , long long>  ww;
 int n,m;
-vector< TEdge> g[N];
-
 void enter()
 {
     cin >> n >> m;
@@ -25,17 +22,18 @@ void enter()
     }
 }
 
+vector< TEdge> g[N];
 void init()
 {
     int ru, rv;
-    for (auto p: ww)
+    for (pair<pair<int, int>, int> p: ww)
     {
         if (p.first.first < p.first.second)
         {
             ru = g[p.first.first].size();
             rv = g[p.first.second].size();
-            g[p.first.first].push_back({p.first.second,rv, p.second,0});
-            g[p.first.second].push_back({p.first.first,ru, p.second,0});
+            g[p.first.first].push_back({p.first.second, rv, p.second, 0});
+            g[p.first.second].push_back({p.first.first, ru, p.second, 0});
         }
     }
 }

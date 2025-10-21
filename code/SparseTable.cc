@@ -3,8 +3,6 @@
 // Preprocessing time: O(n log n)
 // Query time: O(1)
 
-// LG là số lớn nhất thoả 2^LG < N
-// ví dụ: N = 10^5 thì LG = 16 vì 2^16 = 65536
 int a[N], st[LG + 1][N];
 void preprocess() {
     for (int i = 1; i <= n; ++i) st[0][i] = a[i];
