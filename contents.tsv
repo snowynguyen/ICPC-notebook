@@ -38,6 +38,7 @@ EulerianPath.cc	Eulerian path
 
 [Data structures]
 BIT.cc	Binary Indexed Tree
+DSU_rollback.cc DSU rollback
 
 [String algorithms]
 SuffixArray.cc	Suffix array
