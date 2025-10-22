@@ -1,248 +1,152 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
-class DSURollback {
-private:
-    vector<int> parent;
-    vector<int> rank;
-    int components;
-    stack<tuple<int, int, int, int>> history;
-    
-public:
-    DSURollback(int n) {
-        parent.resize(n);
-        rank.resize(n, 0);
-        components = n;
-        for (int i = 0; i < n; i++) {
-            parent[i] = i;
-        }
-    }
-    
-    int find(int x) {
-        while (x != parent[x]) {
-            x = parent[x];
-        }
-        return x;
-    }
-    
-    bool unite(int x, int y) {
-        x = find(x);
-        y = find(y);
-        
-        if (x == y) {
-            history.push({-1, -1, -1, components});
-            return false;
-        }
-        
-        if (rank[x] < rank[y]) {
-            swap(x, y);
-        }
-        
-        history.push({y, parent[y], rank[x], components});
-        
-        parent[y] = x;
-        if (rank[x] == rank[y]) {
-            rank[x]++;
-        }
-        components--;
-        
-        return true;
-    }
-    
-    bool connected(int x, int y) {
-        return find(x) == find(y);
-    }
-    
-    int getComponents() {
-        return components;
-    }
-    
-    void rollback() {
-        if (history.empty()) return;
-        
-        auto [node, old_parent, old_rank, old_components] = history.top();
-        history.pop();
-        
-        if (node != -1) {
-            parent[node] = old_parent;
-            int root = find(node);
-            rank[root] = old_rank;
-        }
-        components = old_components;
-    }
-    
-    int checkpoint() {
-        return history.size();
-    }
-    
-    void rollbackTo(int checkpoint) {
-        while ((int)history.size() > checkpoint) {
-            rollback();
-        }
-    }
-};
+// BeginCodeSnip{DSU}
+class DSU {
+  private:
+	vector<ll> p, sz, sum;
+	// stores all history info related to merges
+	vector<pair<ll &, ll>> history;
 
-struct Edge {
-    int u, v;
-    int start_time, end_time; // edge exists in time range [start_time, end_time)
+  public:
+	DSU(int n) : p(n), sz(n, 1), sum(n) { iota(p.begin(), p.end(), 0); }
+
+	void init_sum(const vector<ll> a) {
+		for (int i = 0; i < (int)a.size(); i++) { sum[i] = a[i]; }
+	}
+
+	int get(int x) { return (p[x] == x) ? x : get(p[x]); }
+
+	ll get_sum(int x) { return sum[get(x)]; }
+
+	void unite(int a, int b) {
+		a = get(a);
+		b = get(b);
+		if (a == b) { return; }
+		if (sz[a] < sz[b]) { swap(a, b); }
+
+		// add to history
+		history.push_back({p[b], p[b]});
+		history.push_back({sz[a], sz[a]});
+		history.push_back({sum[a], sum[a]});
+
+		p[b] = a;
+		sz[a] += sz[b];
+		sum[a] += sum[b];
+	}
+
+	void add(int x, ll v) {
+		x = get(x);
+		history.push_back({sum[x], sum[x]});
+		sum[x] += v;
+	}
+
+	int snapshot() { return history.size(); }
+
+	void rollback(int until) {
+		while (snapshot() > until) {
+			history.back().first = history.back().second;
+			history.pop_back();
+		}
+	}
 };
+// EndCodeSnip
+
+const int MAXN = 3e5;
+
+DSU dsu(MAXN);
 
 struct Query {
-    int type; // 0 = connectivity query, 1 = component count query
-    int u, v; // for connectivity query
-    int time;
-    int id; // original query index
+	int t, u, v, x;
 };
 
-class OfflineDynamicConnectivity {
-private:
-    int n; // number of nodes
-    DSURollback dsu;
-    vector<string> answers;
-    
-    // Divide and conquer on time interval [l, r)
-    void divideConquer(int l, int r, vector<Edge>& edges, vector<Query>& queries) {
-        // Separate queries in this time range
-        vector<Query> current_queries;
-        // Valid queries
-        for (auto& q : queries) {
-            if (q.time >= l && q.time < r) {
-                current_queries.push_back(q);
-            }
-        }
-        
-        // Base case: single time point
-        if (l + 1 == r) {
-            for (auto& q : current_queries) {
-                if (q.type == 0) {
-                    // Connectivity query
-                    if (dsu.connected(q.u, q.v)) {
-                        answers[q.id] = "YES";
-                    } else {
-                        answers[q.id] = "NO";
-                    }
-                } else {
-                    // Component count query
-                    answers[q.id] = to_string(dsu.getComponents());
-                }
-            }
-            return;
-        }
-        
-        if (current_queries.empty()) {
-            return;
-        }
-        
-        int mid = (l + r) / 2;
-        int checkpoint = dsu.checkpoint();
-        
-        // Find edges that span the entire interval [l, r)
-        vector<Edge> left_edges, right_edges, spanning_edges;
-        
-        for (auto& e : edges) {
-            if (e.end_time <= l || e.start_time >= r) {
-                // Edge doesn't exist in [l, r)
-                continue;
-            }
-            
-            if (e.start_time <= l && e.end_time >= r) {
-                // Edge spans entire [l, r)
-                spanning_edges.push_back(e);
-                dsu.unite(e.u, e.v);
-            } else if (e.end_time <= mid) {
-                // Edge only in left half
-                left_edges.push_back(e);
-            } else if (e.start_time >= mid) {
-                // Edge only in right half
-                right_edges.push_back(e);
-            } else {
-                // Edge spans across mid, add to both
-                left_edges.push_back(e);
-                right_edges.push_back(e);
-            }
-        }
-        
-        // Recurse on left half
-        divideConquer(l, mid, left_edges, queries); // trong bc nay luu checkpoint lai het roi
-        
-        // Recurse on right half
-        divideConquer(mid, r, right_edges, queries); // trong bc nay cung luu checkpoint laij het r
-        
-        // Rollback all changes made in this call
-        dsu.rollbackTo(checkpoint);
-    }
-    
-public:
-    OfflineDynamicConnectivity(int n) : n(n), dsu(n) {}
-    
-    vector<string> solve(vector<Edge>& edges, vector<Query>& queries, int max_time) {
-        answers.resize(queries.size());
-        divideConquer(0, max_time, edges, queries);
-        return answers;
-    }
-};
+vector<Query> tree[MAXN * 4];
+
+void update(Query &q, int v, int query_l, int query_r, int tree_l, int tree_r) {
+	if (query_l > tree_r || query_r < tree_l) { return; }
+	if (query_l <= tree_l && query_r >= tree_r) {
+		tree[v].push_back(q);
+		return;
+	}
+	int m = (tree_l + tree_r) / 2;
+	update(q, v * 2, query_l, query_r, tree_l, m);
+	update(q, v * 2 + 1, query_l, query_r, m + 1, tree_r);
+}
+
+void dfs(int v, int l, int r, vector<ll> &ans) {
+	int snapshot = dsu.snapshot();
+	// perform all available operations upon entering
+	for (Query &q : tree[v]) {
+		if (q.t == 1) { dsu.unite(q.u, q.v); }
+		if (q.t == 2) { dsu.add(q.v, q.x); }
+	}
+	if (l == r) {
+		// answer type 3 query if we have one
+		for (Query &q : tree[v]) {
+			if (q.t == 3) { ans[l] = dsu.get_sum(q.v); }
+		}
+	} else {
+		// go deeper into the tree
+		int m = (l + r) / 2;
+		dfs(2 * v, l, m, ans);
+		dfs(2 * v + 1, m + 1, r, ans);
+	}
+	// undo operations upon exiting
+	dsu.rollback(snapshot);
+}
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    
-    int n, k;
-    cin >> n >> k;
-    
-    // Read edges with time ranges
-    vector<Edge> edges;
-    map<pair<int,int>, int> edge_start; // tracks when each edge was added
-    
-    int current_time = 0;
-    vector<Query> queries;
-    
-    for (int i = 0; i < k; i++) {
-        string op;
-        cin >> op;
-        
-        if (op == "+") {
-            int u, v;
-            cin >> u >> v;
-            u--; v--;
-            if (u > v) swap(u, v);
-            
-            edge_start[{u, v}] = current_time;
-            
-        } else if (op == "-") {
-            int u, v;
-            cin >> u >> v;
-            u--; v--;
-            if (u > v) swap(u, v);
-            
-            if (edge_start.count({u, v})) {
-                edges.push_back({u, v, edge_start[{u, v}], current_time});
-                edge_start.erase({u, v});
-            }
-            
-        } else if (op == "connected") {
-            int u, v;
-            cin >> u >> v;
-            u--; v--;
-            queries.push_back({0, u, v, current_time, (int)queries.size()});
-            
-        } else if (op == "?") {
-            queries.push_back({1, -1, -1, current_time, (int)queries.size()});
-        }
-        
-        current_time++;
-    }
-    
-    // Add any remaining edges that were never removed
-    for (auto& [edge_pair, start] : edge_start) {
-        edges.push_back({edge_pair.first, edge_pair.second, start, current_time});
-    }
-    
-    OfflineDynamicConnectivity solver(n);
-    vector<string> answers = solver.solve(edges, queries, current_time);
-    
-    for (auto& ans : answers) {
-        cout << ans << "\n";
-    }
-    
-    return 0;
+	int n, q;
+	cin >> n >> q;
+	vector<ll> a(n);
+	for (int i = 0; i < n; i++) { cin >> a[i]; }
+	dsu.init_sum(a);
+
+	map<pair<int, int>, int> index_added;
+	for (int i = 0; i < q; i++) {
+		int t;
+		cin >> t;
+		if (t == 0) {
+			int u, v;
+			cin >> u >> v;
+			if (u > v) swap(u, v);
+			// store index this edge is added, marks beginning of interval
+			index_added[{u, v}] = i;
+		} else if (t == 1) {
+			int u, v;
+			cin >> u >> v;
+			if (u > v) swap(u, v);
+			Query cur_q = {1, u, v};
+			// add all edges that are deleted to interval [index added, i - 1]
+			update(cur_q, 1, index_added[{u, v}], i - 1, 0, q - 1);
+			index_added[{u, v}] = -1;
+		} else if (t == 2) {
+			int v, x;
+			cin >> v >> x;
+			Query cur_q = {2, -1, v, x};
+			// add all sum queries to interval [i, q - 1]
+			update(cur_q, 1, i, q - 1, 0, q - 1);
+		} else if (t == 3) {
+			int v;
+			cin >> v;
+			Query cur_q = {3, -1, v};
+			// add all output queries to interval [i, i]
+			update(cur_q, 1, i, i, 0, q - 1);
+		}
+	}
+
+	// add all edges that are not deleted to interval [index added, q - 1]
+	for (auto [edge, index] : index_added) {
+		if (index != -1) {
+			Query cur_q = {1, edge.first, edge.second};
+			update(cur_q, 1, index, q - 1, 0, q - 1);
+		}
+	}
+
+	vector<ll> ans(q, -1);
+	dfs(1, 0, q - 1, ans);
+	for (int i = 0; i < q; i++) {
+		if (ans[i] != -1) { cout << ans[i] << "\n"; }
+	}
 }
