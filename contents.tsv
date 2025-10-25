@@ -35,10 +35,11 @@ FastDijkstra.cc	Fast Dijkstra's algorithm
 SCC.cc	Strongly connected components
 Bridges.cpp	Bridges And Articulation Points
 EulerianPath.cc	Eulerian path
+matching.cpp	Unweighted Bipartite Matching
 
 [Data structures]
 BIT.cc	Binary Indexed Tree
-DSU_rollback.cc DSU rollback
+DSU_rollback.cc	DSU rollback
 
 [String algorithms]
 SuffixArray.cc	Suffix array
