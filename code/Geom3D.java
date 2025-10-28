@@ -54,3 +54,4 @@ public class Geom3D {
     return Math.sqrt(ptLineDistSq(x1, y1, z1, x2, y2, z2, px, py, pz, type));
   }
 }
+

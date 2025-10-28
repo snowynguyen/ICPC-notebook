@@ -9,21 +9,13 @@ Primes.cc	Prime numbers
 HighlyCompositeNumber.py	Highly Composite Numbers
 NumberTheory.cc	Number theory (modular, linear Diophantine)
 ChineseRemainderTheorem.cc	Chinese Remainder Theorem
-
-[Combinatorial optimization]
-#MaxFlow.cc	Dense max-flow
-FFLow.cpp	Dinic max-flow for sparse graph
-MinCostMaxFlow.cc	Min-cost max-flow
-#PushRelabel.cc	Push-relabel max-flow	
-#MinCostMatching.cc	Min-cost matching
-#MaxBipartiteMatching.cc	Max bipartite matchine
-MinCut.cc	Global min-cut
-GraphCutInference.cc	Graph cut inference
+DiscreteLog.cpp	Discrete Log
 
 [Geometry]
 ConvexHull.cc	Convex hull
 Geometry.cc	Miscellaneous geometry
 Delaunay.cc	Slow Delaunay triangulation
+PointInPolygon.cpp	Point in Polygon
 
 [Numerical algorithms]
 GaussJordan.cc	Systems of linear equations, matrix inverse, determinant
@@ -32,10 +24,21 @@ Simplex.cc	Simplex algorithm
 
 [Graph algorithms]
 FastDijkstra.cc	Fast Dijkstra's algorithm
+BellmanFord.cc	Bellman Ford's shortest path for negative cycle detection
 SCC.cc	Strongly connected components
 Bridges.cpp	Bridges And Articulation Points
 EulerianPath.cc	Eulerian path
+
+[Combinatorial optimization]
+#MaxFlow.cc	Dense max-flow
+FFLow.cpp	Dinic max-flow for sparse graph
+MinCostMaxFlow.cc	Min-cost max-flow
+MinCostMatching.cc	Min Cost Matching
+PushRelabel.cc	Push-relabel max-flow	
 matching.cpp	Unweighted Bipartite Matching
+#MaxBipartiteMatching.cc	Max bipartite matching
+MinCut.cc	Global min-cut
+GraphCutInference.cc	Graph cut inference
 
 [Data structures]
 BIT.cc	Binary Indexed Tree
@@ -48,10 +51,11 @@ KMP.cc	Knuth-Morris-Pratt
 [Miscellaneous]
 LongestIncreasingSubsequence.cc	Longest increasing subsequence
 Dates.cc	Dates
-LogLan.java	Regular expressions
 IO.cc	C++ input/output
 LatLong.cc	Latitude/longitude
-#RandomSTL.cc	Random STL stuff
+RandomSTL.cc	Random STL stuff
 #CSP.cc	Constraint satisfaction problems
 LCS.cc	Longest common subsequence
-#MillerRabin.c	Miller-Rabin Primality Test (C)
+MillerRabin.cc	Miller-Rabin Primality Test (C)
+SUPERFASTIO.CPP	Super Duper Fast IO 
+FFT.cc	FFT
