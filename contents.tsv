@@ -47,6 +47,7 @@ DSU_rollback.cc	DSU rollback
 [String algorithms]
 SuffixArray.cc	Suffix array
 KMP.cc	Knuth-Morris-Pratt
+Z.cpp	Z function
 
 [Miscellaneous]
 LongestIncreasingSubsequence.cc	Longest increasing subsequence
