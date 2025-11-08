@@ -1,5 +1,5 @@
 // O(sqrt(x)) Exhaustive Primality Test
-#include <cmath>
+#include <bits/stdc++.h>
 #define EPS 1e-7
 typedef long long LL;
 bool IsPrimeSlow (LL x)
@@ -7,7 +7,7 @@ bool IsPrimeSlow (LL x)
   if(x<=1) return false;
   if(x<=3) return true;
   if (!(x%2) || !(x%3)) return false;
-  LL s=(LL)(sqrt((double)(x))+EPS);
+  LL s=(LL)(sqrt((long double)(x))+EPS);
   for(LL i=5;i<=s;i+=6)
   {
     if (!(x%i) || !(x%(i+2))) return false;
@@ -29,11 +29,6 @@ bool IsPrimeSlow (LL x)
 //    751   757   761   769   773   787   797   809   811   821   823   827
 //    829   839   853   857   859   863   877   881   883   887   907   911
 //    919   929   937   941   947   953   967   971   977   983   991   997
-
-// Other primes:
-// 1  The largest prime smaller than 10 is 7.
-// 2  The largest prime smaller than 100 is 97.
-// 3  The largest prime smaller than 1000 is 997.
 // 4  The largest prime smaller than 10000 is 9973.
 // 5  The largest prime smaller than 100000 is 99991.
 // 6  The largest prime smaller than 1000000 is 999983.
@@ -49,7 +44,9 @@ bool IsPrimeSlow (LL x)
 //16  The largest prime smaller than 10000000000000000 is 9999999999999937.
 //17  The largest prime smaller than 100000000000000000 is 99999999999999997.
 //18  The largest prime smaller than 1000000000000000000 is 999999999999999989.
-// The 20 primes past 1e9+7 are.
-// 1000000007 1000000009 1000000021 1000000033 1000000087 1000000093 1000000097 
-// 1000000103 1000000123 1000000181 1000000207 1000000223 1000000241 1000000271 
-// 1000000289 1000000297 1000000321 1000000349 1000000363 1000000403 
+// Primes past 1e9 are. 1000000007 1000000009 1000000021 1000000033 
+//     1000000087 1000000093 1000000097 1000000103 1000000123 1000000181 
+// Primes below 1e9: 999999937 999999929 999999893 999999883 999999797 
+//     999999761 999999757 999999751 999999739 999999733 999999677
+// Primes <= (10^9)/31: 32257999 32257963 32257921 32257909 32257903 32257879
+// Primes<=(10^9)/307: 3257299 3257297 3257291 3257269 3257257 3257239 3257231 
