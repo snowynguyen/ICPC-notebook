@@ -1,4 +1,4 @@
-// Two-phase simplex algorithm for solving linear programs of the form
+// Two-phase simplex algorithm for solving linear opti. of the form
 //
 //     maximize     c^T x
 //     subject to   Ax <= b

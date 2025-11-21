@@ -1,5 +1,5 @@
 \documentclass[10pt]{article}
-\usepackage[left=0.4in,right=0.4in,top=0.7in,bottom=0.4in]{geometry}
+\usepackage[left=0.2in,right=0.2in,top=0.55in,bottom=0.2in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
@@ -11,29 +11,68 @@
 \usepackage{bookmark}
 \usepackage{amsmath}
 
+\lstset{
+    tabsize=2
+}
+
+% Define a new command to set the size to 6.5pt
+\newcommand{\fontsizeSixtyFive}{%
+    % 6.5pt font size, with a baseline skip (line height) of 7pt
+    \fontsize{6.5pt}{7pt}\selectfont
+}
+
+% Apply this new command to every inline math environment
+\everymath{\fontsizeSixtyFive}
+
 \renewcommand*{\ttdefault}{pcr}
 \renewcommand\cftsecfont{\fontsize{7}{7.5}\bfseries}
 \renewcommand\cftsecpagefont{\fontsize{7}{7.5}\mdseries}
 \renewcommand\cftsubsecfont{\fontsize{6.5}{7}\mdseries}
 \renewcommand\cftsubsecpagefont{\fontsize{6.5}{7}\mdseries}
 \renewcommand\cftsecafterpnum{\vspace{-1ex}}
-\renewcommand\cftsubsecafterpnum{\vspace{-1ex}}
+\renewcommand\cftsubsecafterpnum{\vspace{-1.25ex}}
 
 \lstdefinestyle{shared}{
     belowcaptionskip=1\baselineskip,
     breaklines=true,
-    xleftmargin=\parindent,
+    xleftmargin=0.08cm,
     showstringspaces=false,
     basicstyle=\fontsize{6}{6.5}\ttfamily,
 }
+% \lstdefinestyle{cpp}{
+% 	style=shared,
+%     language=C++,
+%     keywordstyle=\bfseries\color{green!40!black},
+%     commentstyle=\itshape\color{purple!40!black},
+%     identifierstyle=\color{blue},
+%     stringstyle=\color{red!80!black},
+% }
+
+% Define Monokai Light colors globally to avoid parsing errors inside lstdefinestyle
+\definecolor{mLightBase}{HTML}{fafafa}
+\definecolor{mLightKeyword}{HTML}{f9005a}
+\definecolor{mLightComment}{HTML}{75715E}
+\definecolor{mLightString}{HTML}{998f2f}
+\definecolor{mLightNumber}{HTML}{684d99}
+\definecolor{mLightType}{HTML}{0089b3}
+\definecolor{mLightIdent}{HTML}{49483e} % Foreground/Operators
 \lstdefinestyle{cpp}{
-	style=shared,
+    style=shared, 
     language=C++,
-    keywordstyle=\bfseries\color{green!40!black},
-    commentstyle=\itshape\color{red!80!black},
-    identifierstyle=\color{blue},
-    stringstyle=\color{purple!40!black},
+    backgroundcolor=\color{mLightBase},
+    % --- General Settings ---
+    % 1. Standard Keywords (Set 1): if, for, while, return, etc.
+    keywordstyle=\bfseries\color{mLightKeyword},
+    % 2. Custom Keywords (Set 2): Types and storage classes
+    keywords=[2]{class, struct, enum, union, typedef, typename, bool, char, double, float, int, long, short, void, unsigned, signed, auto, decltype, const, volatile, extern, static, register, mutable, thread_local},
+    keywordstyle=[2]\itshape\color{mLightType},
+    % --- Other Styles ---
+    commentstyle=\itshape\color{mLightComment},
+    stringstyle=\color{mLightString},
+    identifierstyle=\color{mLightIdent},
+    numberstyle=\color{mLightNumber},
 }
+
 \lstdefinestyle{java}{
     style=shared,
     language=Java,
@@ -48,7 +87,7 @@
     keywordstyle=\bfseries\color{green!40!black},
     commentstyle=\itshape\color{purple!40!black},
     identifierstyle=\color{blue},
-    stringstyle=\color{orange},
+    stringstyle=\color{red!80!black},
 }
 \lstdefinestyle{txt}{
     style=shared,
@@ -73,10 +112,12 @@
 
 \begin{document}
 \begin{landscape}
-\begin{multicols}{2}
+
+\setlength{\columnsep}{0.1cm}
+\begin{multicols}{3}
 
 \maketitle
-\vspace{-10ex}
+\vspace{-4ex}
 \tableofcontents
 \pagestyle{fancy}
 

@@ -106,13 +106,14 @@ PT ComputeCircleCenter(PT a, PT b, PT c) {
   return ComputeLineIntersection(b, b+RotateCW90(a-b), c, c+RotateCW90(a-c));
 }
 
-// determine if point is in a possibly non-convex polygon (by William
-// Randolph Franklin); returns 1 for strictly interior points, 0 for
-// strictly exterior points, and 0 or 1 for the remaining points.
-// Note that it is possible to convert this into an *exact* test using
-// integer arithmetic by taking care of the division appropriately
-// (making sure to deal with signs properly) and then by writing exact
-// tests for checking point on polygon boundary
+// determine if point is in a possibly non-convex polygon (by 
+// William Randolph Franklin); returns 1 for strictly interior 
+// points, 0 for strictly exterior points, and 0 or 1 for the 
+// remaining points. Note that it is possible to convert this into 
+// an *exact* test using integer arithmetic by taking care of the 
+// division appropriately (making sure to deal with signs 
+// properly) and then by writing exact tests for checking point on 
+// polygon boundary
 bool PointInPolygon(const vector<PT> &p, PT q) {
   bool c = 0;
   for (int i = 0; i < p.size(); i++){
@@ -128,8 +129,7 @@ bool PointInPolygon(const vector<PT> &p, PT q) {
 // determine if point is on the boundary of a polygon
 bool PointOnPolygon(const vector<PT> &p, PT q) {
   for (int i = 0; i < p.size(); i++)
-    if (dist2(ProjectPointSegment(p[i], p[(i+1)%p.size()], q), q) < EPS)
-      return true;
+    if (dist2(ProjectPointSegment(p[i], p[(i+1)%p.size()], q), q) < EPS) return true;
     return false;
 }
 
@@ -165,10 +165,10 @@ vector<PT> CircleCircleIntersection(PT a, PT b, double r, double R) {
   return ret;
 }
 
-// This code computes the area or centroid of a (possibly nonconvex)
-// polygon, assuming that the coordinates are listed in a clockwise or
-// counterclockwise fashion.  Note that the centroid is often known as
-// the "center of gravity" or "center of mass".
+// This code computes the area or centroid of a (possibly 
+// nonconvex) polygon, assuming that the coordinates are listed in 
+// a clockwise or counterclockwise fashion.  Note that the 
+// centroid is often known as the "center of gravity".
 double ComputeSignedArea(const vector<PT> &p) {
   double area = 0;
   for(int i = 0; i < p.size(); i++) {
@@ -239,10 +239,10 @@ int main() {
        << LinesCollinear(PT(1,1), PT(3,5), PT(5,9), PT(7,13)) << endl;
   
   // expected: 1 1 1 0
-  cerr << SegmentsIntersect(PT(0,0), PT(2,4), PT(3,1), PT(-1,3)) << " "
-       << SegmentsIntersect(PT(0,0), PT(2,4), PT(4,3), PT(0,5)) << " "
-       << SegmentsIntersect(PT(0,0), PT(2,4), PT(2,-1), PT(-2,1)) << " "
-       << SegmentsIntersect(PT(0,0), PT(2,4), PT(5,5), PT(1,7)) << endl;
+  cerr << SegmentsIntersect(PT(0,0),PT(2,4),PT(3,1),PT(-1,3))<<" "
+       << SegmentsIntersect(PT(0,0),PT(2,4),PT(4,3),PT(0,5)) <<" "
+       << SegmentsIntersect(PT(0,0),PT(2,4),PT(2,-1),PT(-2,1))<<" "
+       << SegmentsIntersect(PT(0,0),PT(2,4),PT(5,5),PT(1,7))<<endl;
   
   // expected: (1,2)
   cerr << ComputeLineIntersection(PT(0,0), PT(2,4), PT(3,1), PT(-1,3)) << endl;
@@ -277,17 +277,17 @@ int main() {
   //           blank line
   //           (4,5) (5,4)
   vector<PT> u = CircleLineIntersection(PT(0,6), PT(2,6), PT(1,1), 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
+  for (int i=0;i<u.size();i++) cerr << u[i] << " "; cerr << endl;
   u = CircleLineIntersection(PT(0,9), PT(9,0), PT(1,1), 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
+  for (int i=0;i<u.size();i++) cerr << u[i] << " "; cerr << endl;
   u = CircleCircleIntersection(PT(1,1), PT(10,10), 5, 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
+  for (int i=0;i<u.size();i++) cerr << u[i] << " "; cerr << endl;
   u = CircleCircleIntersection(PT(1,1), PT(8,8), 5, 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
-  u = CircleCircleIntersection(PT(1,1), PT(4.5,4.5), 10, sqrt(2.0)/2.0);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
-  u = CircleCircleIntersection(PT(1,1), PT(4.5,4.5), 5, sqrt(2.0)/2.0);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
+  for (int i=0;i<u.size();i++) cerr << u[i] << " "; cerr << endl;
+  u=CircleCircleIntersection(PT(1,1),PT(4.5,4.5),10,sqrt(2.0)/2.0);
+  for (int i=0;i<u.size();i++) cerr << u[i] << " "; cerr << endl;
+  u=CircleCircleIntersection(PT(1,1),PT(4.5,4.5),5,sqrt(2.0)/2.0);
+  for (int i=0;i<u.size();i++) cerr << u[i] << " "; cerr << endl;
   
   // area should be 5.0
   // centroid should be (1.1666666, 1.166666)

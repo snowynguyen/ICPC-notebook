@@ -6,5 +6,7 @@
      "[tsv]": {
         "editor.detectIndentation": false,
         "editor.insertSpaces": false
-    }
+    },
+    "editor.wordWrapColumn": 67,
+    "editor.wordWrap": "wordWrapColumn"
 }

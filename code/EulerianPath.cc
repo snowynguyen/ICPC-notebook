@@ -13,7 +13,7 @@ struct Edge
 
 const int max_vertices = ;
 int num_vertices;
-list<Edge> adj[max_vertices];		// adjacency list
+list<Edge> adj[max_vertices];	// adjacency list
 
 vector<int> path;
 

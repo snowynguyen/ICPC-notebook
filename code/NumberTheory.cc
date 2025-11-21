@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
 
 typedef vector<int> VI;
@@ -114,13 +113,6 @@ int main() {
 
 	// expected: 8
 	cout << mod_inverse(8, 9) << endl;
-
-	// expected: 23 105
-	//           11 12
-	PII ret = chinese_remainder_theorem(VI({ 3, 5, 7 }), VI({ 2, 3, 2 }));
-	cout << ret.first << " " << ret.second << endl;
-	ret = chinese_remainder_theorem(VI({ 4, 6 }), VI({ 3, 5 }));
-	cout << ret.first << " " << ret.second << endl;
 
 	// expected: 5 -15
 	if (!linear_diophantine(7, 2, 5, x, y)) cout << "ERROR" << endl;

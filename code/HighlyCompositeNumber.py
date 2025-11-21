@@ -1,6 +1,6 @@
-# This program prints all hcn (highly composite numbers) <= MAXN (=10**18)
-# The value of MAXN can be changed arbitrarily. When MAXN = 10**100, the
-# program needs less than one second to generate the list of hcn.
+# Prints all HCN (highly composite numbers) <= MAXN (=10**18)
+# The value of MAXN can be changed arbitrarily. When MAXN =
+# 10**100, the program takes <1s to generate the list of HCN.
 from math import log
 MAXN = 10**18
 
@@ -31,6 +31,6 @@ def gen_hcn():
 	return hcn
 
 # Biggest HCN smaller than 10^9, 10^12, 10^18, and their number of divisors:
-# 735134400             1344        2^6*3^3*5^2*7*11*13*17
-# 963761198400          6720        2^6*3^4*5^2*7*11*13*17*19*23
-# 897612484786617600    103680      2^8*3^4*5^2*7^2*11*13*17*19*23*29*31*37
+# 735134400          1344   2^6*3^3*5^2*7*11*13*17
+# 963761198400       6720   2^6*3^4*5^2*7*11*13*17*19*23
+# 897612484786617600 103680 2^8*3^4*5^2*7^2*11*13*17*19*23*29*31*37

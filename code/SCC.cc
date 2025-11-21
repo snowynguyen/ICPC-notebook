@@ -1,7 +1,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-vector<bool> visited; // keeps track of which vertices are already visited
+vector<bool> visited; // keeps track of visited vertices
 
 // runs depth first search starting at vertex v.
 // each visited vertex is appended to the output vector when dfs leaves it.
@@ -10,7 +10,7 @@ void dfs(int v, vector<vector<int> > const& adj, vector<int> &output) {
     for (auto u : adj[v])
         if (!visited[u])
             dfs(u, adj, output);
-    output.push_back(v); // This is used to record the t_out of each vertices
+    output.push_back(v); // used to record the t_out of each vertex
 }
 
 // input: adj -- adjacency list of G
@@ -22,7 +22,7 @@ void strongly_connected_components(vector<vector<int> > const& adj,
     int n = adj.size();
     components.clear(), adj_cond.clear();
 
-    vector<int> order; // will be a sorted list of G's vertices by exit time
+    vector<int> order; // sorted list of G's vertices by exit time
 
     visited.assign(n, false);
 
@@ -40,7 +40,8 @@ void strongly_connected_components(vector<vector<int> > const& adj,
     visited.assign(n, false);
     reverse(order.begin(), order.end());
 
-    vector<int> roots(n, 0); // gives the root vertex of a vertex's SCC
+    vector<int> roots(n, 0); 
+    // gives the root vertex of a vertex's SCC
 
     // second series of depth first searches
     for (auto v : order)
@@ -49,7 +50,7 @@ void strongly_connected_components(vector<vector<int> > const& adj,
             dfs(v, adj_rev, component);
             components.push_back(component);
             int root = *min_element(begin(component), end(component)); 
-            // actually, we can choose any element in the component!!!.
+            // can choose any element in the component!!!.
             for (auto u : component)
                 roots[u] = root;
         }

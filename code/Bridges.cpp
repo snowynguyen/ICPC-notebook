@@ -1,9 +1,6 @@
 // Official version
-
 #include <bits/stdc++.h>
-
 using namespace std;
-
 const int maxN = 10010;
 
 int n, m;

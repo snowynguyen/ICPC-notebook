@@ -1,11 +1,12 @@
-// Official version
-// Source: https://cp-algorithms.com/math/chinese-remainder-theorem.html
+// Official version: https://cp-algorithms.com/math/chinese-remainder-theorem.html
 
+#define ll long long
 struct Congruence {
-    long long a, m;
+    ll a, m;
 };
 
-long long chinese_remainder_theorem(vector<Congruence> const& congruences) {
+// CRT = Chinese Remainder Theorem
+ll CRT(vector<Congruence> const& congruences) {
     long long M = 1;
     for (auto const& congruence : congruences) {
         M *= congruence.m;
@@ -20,3 +21,5 @@ long long chinese_remainder_theorem(vector<Congruence> const& congruences) {
     }
     return solution;
 }
+// CRT({{2,3},{3,5},{2,7}}) = 23 mod 105
+// CRT({{3,4},{5,6}}) = 11 mod 12

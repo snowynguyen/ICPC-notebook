@@ -25,7 +25,7 @@ int main() {
 		}
 	}
 
-	// use priority queue in which top element has the "smallest" priority
+	// priority queue but top element has the "smallest" priority
 	priority_queue<PII, vector<PII>, greater<PII> > Q;
 	vector<int> dist(N, INF), dad(N, -1);
 	Q.push(make_pair(0, s));

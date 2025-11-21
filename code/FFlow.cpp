@@ -1,8 +1,8 @@
 #include <bits/stdc++.h> 
 using namespace std;
- 
 const int N = 5001;
- 
+#define fi first
+#define se second
 struct TEdge
 {
     int v,rit; //rit: reverse edge 
@@ -28,12 +28,12 @@ void init()
     int ru, rv;
     for (pair<pair<int, int>, int> p: ww)
     {
-        if (p.first.first < p.first.second)
+        if (p.fi.fi < p.fi.se)
         {
-            ru = g[p.first.first].size();
-            rv = g[p.first.second].size();
-            g[p.first.first].push_back({p.first.second, rv, p.second, 0});
-            g[p.first.second].push_back({p.first.first, ru, p.second, 0});
+            ru = g[p.fi.fi].size();
+            rv = g[p.fi.se].size();
+            g[p.fi.fi].push_back({p.fi.se, rv, p.se, 0});
+            g[p.fi.se].push_back({p.fi.fi, ru, p.se, 0});
         }
     }
 }
