@@ -39,74 +39,23 @@
     showstringspaces=false,
     basicstyle=\fontsize{6}{6.5}\ttfamily,
 }
-% \lstdefinestyle{cpp}{
-% 	style=shared,
-%     language=C++,
-%     keywordstyle=\bfseries\color{green!40!black},
-%     commentstyle=\itshape\color{purple!40!black},
-%     identifierstyle=\color{blue},
-%     stringstyle=\color{red!80!black},
-% }
 
-% \definecolor{sBase}{HTML}{FFFFFF}       % Background: White
-% \definecolor{sComment}{HTML}{75715E}    % Comments: Grey-Brown
-% \definecolor{sKeyword}{HTML}{F92672}    % Keywords (while): Pink/Magenta
-% \definecolor{sType}{HTML}{66D9EF}       % Types (int): Cyan (Darkened for readability)
-% % Note: The screenshot cyan is very light. I suggest a slightly darker blue for white paper:
-% \definecolor{sBlue}{HTML}{0089B3}       % Types/Brackets: Deep Cyan/Blue
-% \definecolor{sString}{HTML}{998f2f}     % Strings: Olive
-% \definecolor{sNumber}{HTML}{AE81FF}     % Numbers: Light Purple (Darkened below for paper)
-% \definecolor{sNumberDark}{HTML}{684D99} % Numbers: Purple
-% \definecolor{sIdent}{HTML}{333333}      % Identifiers: Black/Dark Grey
-% \definecolor{sFunc}{HTML}{679C00}       % Functions (powermod): Green
-% \definecolor{sParam}{HTML}{FD971F}      % Parameters (a, b): Orange
-
-\definecolor{sBase}{HTML}{FAFAFA}  % Background: White
-\definecolor{sComment}{HTML}{666666} % Comments: Grey-Brown
-\definecolor{sKeyword}{HTML}{FF3366} % Keywords (while): Pink/Magenta
-\definecolor{sType}{HTML}{66CCFF}% Types (int): Cyan
-\definecolor{sBlue}{HTML}{0099CC} % Types/Brackets: Deep Cyan/Blue
-\definecolor{sString}{HTML}{999933} % Strings: Olive
-\definecolor{sNumber}{HTML}{9999FF} % Numbers: Light Purple 
-\definecolor{sNumberDark}{HTML}{666699} % Numbers: Purple
-\definecolor{sIdent}{HTML}{333333}% Identifiers: Black/Dark Grey
-\definecolor{sFunc}{HTML}{50CC00}  % Functions (powermod): Green
-\definecolor{sParam}{HTML}{FF9933}% Parameters (a, b): Orange
+% Define Monokai Light colors globally to avoid parsing errors inside lstdefinestyle
+\definecolor{mLightBase}{HTML}{fafafa}
+\definecolor{mLightKeyword}{HTML}{f9005a}
+\definecolor{mLightComment}{HTML}{75715E}
+\definecolor{mLightString}{HTML}{998f2f}
+\definecolor{mLightNumber}{HTML}{684d99}
+\definecolor{mLightType}{HTML}{0089b3}
+\definecolor{mLightIdent}{HTML}{49483e} % Foreground/Operators
 
 \lstdefinestyle{cpp}{
+	style=shared,
     language=C++,
-    backgroundcolor=\color{sBase},
-    basicstyle=\fontsize{6}{6.5}\ttfamily\color{sIdent},
-    commentstyle=\itshape\color{sComment},
-    stringstyle=\color{sString},
-    numberstyle=\color{sNumberDark},
-    keywordstyle=\bfseries\color{sKeyword},
-    breaklines=true,
-    breakatwhitespace=true,
-    keywords=[2]{int, double, float, void, char, bool, long, unsigned, auto, const, int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t, size_t},
-    keywordstyle=[2]\itshape\color{sBlue},
-    emph={powermod},
-    emphstyle=\color{sFunc},
-    literate={=}{{\textcolor{sKeyword}{=}}}1
-             {+}{{\textcolor{sKeyword}{+}}}1
-             {-}{{\textcolor{sKeyword}{-}}}1
-             {*}{{\textcolor{sKeyword}{*}}}1
-             {<}{{\textcolor{sKeyword}{<}}}1
-             {>}{{\textcolor{sKeyword}{>}}}1
-             {!}{{\textcolor{sKeyword}{!}}}1
-             {^}{{\textcolor{sKeyword}{\textasciicircum}}}1
-             {|}{{\textcolor{sKeyword}{|}}}1
-             {&}{{\textcolor{sKeyword}{\&}}}1
-             {~}{{\textcolor{sKeyword}{\textasciitilde}}}1
-             {(}{{\textcolor{sBlue}{(}}}1
-             {)}{{\textcolor{sBlue}{)}}}1
-             {[}{{\textcolor{sBlue}{[}}}1
-             {]}{{\textcolor{sBlue}{]}}}1
-             {\{}{{\textcolor{sBlue}{\{}}}1
-             {\}}{{\textcolor{sBlue}{\}}}}1
-             {;}{{\textcolor{sIdent}{;}}}1
-             {,}{{\textcolor{sIdent}{,}}}1
-             {.}{{\textcolor{sIdent}{.}}}1
+    keywordstyle=\bfseries\color{green!40!black},
+    commentstyle=\itshape\color{red!80!black},
+    identifierstyle=\color{blue},
+    stringstyle=\color{purple!40!black},
 }
 
 \lstdefinestyle{java}{

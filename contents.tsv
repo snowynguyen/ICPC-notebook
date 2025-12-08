@@ -28,6 +28,8 @@ BellmanFord.cc	Bellman Ford's shortest path for negative cycle detection
 SCC.cc	Strongly connected components
 Bridges.cpp	Bridges And Articulation Points
 EulerianPath.cc	Eulerian path
+CentroidFind.cpp	Finding centroid
+CentroidDecomposition.cpp	Centroid Decomposition
 
 [Combinatorial optimization]
 #MaxFlow.cc	Dense max-flow

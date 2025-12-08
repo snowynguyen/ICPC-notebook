@@ -23,7 +23,7 @@ void build(int id, int l, int r) {
     st[id] = max(st[2 * id], st[2 * id + 1]);
 }
 
-void fix(int id, int l, int r) {
+void down(int id, int l, int r) {
     if (!lazy[id]) return; 
     st[id] += lazy[id];
 
@@ -37,11 +37,11 @@ void fix(int id, int l, int r) {
 
 void update(int id, int l, int r, int u, int v, int val) {
 	// Update the whole range [u, v]
-    fix(id, l, r); 
+    down(id, l, r); 
     if (l >  v || r <  u) return;
     if (l >= u && r <= v) {
         lazy[id] += val; 
-        fix(id, l, r); 
+        down(id, l, r); 
         return;
     }
     int mid = l + r >> 1;
@@ -50,8 +50,8 @@ void update(int id, int l, int r, int u, int v, int val) {
     st[id] = max(st[2 * id], st[2 * id + 1]);
 }
 
-long long get(int id, int l, int r, int u, int v) { // in this code, we reduce l, r such that it matches u, v
-    fix(id, l, r); // luon luon fix truoc khi lay!!!
+long long get(int id, int l, int r, int u, int v) {
+    down(id, l, r); // luon luon down truoc khi lay!!!
     if (l >  v || r <  u) return -inf;
     if (l >= u && r <= v) return st[id];
 
