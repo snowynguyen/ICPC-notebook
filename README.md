@@ -1,15 +1,19 @@
 ACM-ICPC Team Reference Notebook 
 ========================
 
-VinUniversity ICPC Team Reference Notebook. Forked from Stanford ACM-ICPC teams' Github [here](https://github.com/jaehyunp/stanfordacm). The team notebook is compiled from codes written by previous Stanford team members and coaches.
+VinUniversity ICPC Team Reference Notebook. Forked from Stanford ACM-ICPC teams' Github [here](https://github.com/jaehyunp/stanfordacm). The team notebook is compiled from code written by previous Stanford team members and coaches.
 
-Generating / compiling team notebook
+Using the notebook
+========================
+Download the `notebook.pdf` file; everything is in here.
+
+Generating/compiling team notebook
 ========================
 The included Python scripts can generate the notebook in PDF or HTML format. Both scripts read the contents of the notebook from `contents.tsv`.
 
 Prerequisites
 -----------
-A texlive installation is required. The `latexmk` command should be available from the command line. 
+A TexLive installation is required. The `latexmk` command should be available from the command line. 
 
 Compiling PDF version
 -----------
