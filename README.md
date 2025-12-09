@@ -13,12 +13,12 @@ The included Python scripts can generate the notebook in PDF or HTML format. Bot
 
 Prerequisites
 -----------
-A TexLive installation is required. The `latexmk` command should be available from the command line. 
+A TexLive installation is required. The `latexmk` command must be available from the command line. This can be done by adding `latexmk` to your shell's PATH variable.  
+
+Python is required and must be available from the command line. 
 
 Compiling PDF version
 -----------
-Requires: [Python 2/3](https://www.python.org/), [latexmk](https://www.ctan.org/pkg/latexmk/)
-
 Script for generating the PDF file is `python generate_pdf.py`.
 The LaTeX template that the script uses is `notebook.tex`. It recognizes common file extensions for C/C++/Java/Python/Tex and applies syntax highlighting. In order to change the color scheme or add additional languages, both `notebook.tex` and `generate_pdf.py` should be modified accordingly.
 
