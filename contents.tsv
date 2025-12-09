@@ -45,6 +45,7 @@ GraphCutInference.cc	Graph cut inference
 [Data structures]
 BIT.cc	Binary Indexed Tree
 DSU_rollback.cc	DSU rollback
+SegmentTreeBeats.cpp	Segment Tree Beats
 
 [String algorithms]
 SuffixArray.cc	Suffix array
