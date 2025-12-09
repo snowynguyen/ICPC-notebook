@@ -46,6 +46,7 @@ GraphCutInference.cc	Graph cut inference
 BIT.cc	Binary Indexed Tree
 DSU_rollback.cc	DSU rollback
 SegmentTreeBeats.cpp	Segment Tree Beats
+PST.cpp	Persistent Segment Tree 
 
 [String algorithms]
 SuffixArray.cc	Suffix array
