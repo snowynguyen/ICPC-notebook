@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 // Min cost bipartite matching via shortest augmenting paths
 //
 // This is an O(n^3) implementation of a shortest augmenting path
@@ -10,9 +10,9 @@
 //   Lmate[i] = index of right node that left node i pairs with
 //   Rmate[j] = index of left node that right node j pairs with
 //
-// The values in cost[i][j] may be positive or negative.  To perform
-// maximization, simply negate the cost[][] matrix.
-//////////////////////////////////////////////////////////////////////
+// The values in cost[i][j] may be positive or negative.  To 
+// perform maximization, simply negate the cost[][] matrix.
+///////////////////////////////////////////////////////////////////
 
 #include <algorithm>
 #include <cstdio>

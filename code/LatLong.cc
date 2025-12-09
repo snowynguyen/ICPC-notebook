@@ -1,13 +1,8 @@
-/*
-Converts from rectangular coordinates to latitude/longitude and vice
-versa. Uses degrees (not radians).
-*/
-
+/* Converts from rectangular coordinates to latitude/longitude and vice versa. Uses degrees (not radians). */
 #include <iostream>
 #include <cmath>
-
 using namespace std;
-
+const long double M_PI=3.1415926535897932384626433832795L;
 struct ll
 {
   double r, lat, lon;

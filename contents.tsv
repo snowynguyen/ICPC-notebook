@@ -47,6 +47,7 @@ BIT.cc	Binary Indexed Tree
 DSU_rollback.cc	DSU rollback
 SegmentTreeBeats.cpp	Segment Tree Beats
 PST.cpp	Persistent Segment Tree 
+QTREEX.cpp	Heavy-Light Decomposition 
 
 [String algorithms]
 SuffixArray.cc	Suffix array
