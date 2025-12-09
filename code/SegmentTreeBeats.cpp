@@ -4,6 +4,8 @@
 * 1 l r b: For each i=l, ..., r-1, a_i <- max(ai, b)
 * 2 l r b: For each i=l, ..., r-1, a_i <- a_i + b
 * 3 l r: Print Sum from i=l to r-1 of a_i
+
+Time complexity: O((n+q)log^2(n))
 */
 
 #include <bits/stdc++.h>
